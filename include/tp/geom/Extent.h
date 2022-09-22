@@ -1,0 +1,64 @@
+/*
+    Copyright 2022 Total Pave Inc
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
+#pragma once
+
+#include <limits>
+#include <cstdint>
+
+namespace TP { namespace geom {
+    template <class T>
+    class Extent {
+        public:
+            Extent(void);
+
+            Extent(T minx, T miny, T maxx, T maxy);
+
+            virtual ~Extent();// {}
+
+            /**
+             * @brief   Returns true if the other extent is completely contained
+             *          or overlaps this extent.
+             * 
+             * @param extent 
+             * @return true 
+             * @return false 
+             */
+            virtual bool isInBounds(const Extent& b) const;
+
+            void set(T minx, T miny, T maxx, T maxy);
+
+            void get(T& minx, T& miny, T& maxx, T& maxy) const;
+
+            void extend(T x, T y);
+
+            void extend(const Extent& extent);
+
+        private:
+            T $minx, $miny, $maxx, $maxy;
+    };
+
+    template class Extent<float>;
+    template class Extent<double>;
+    template class Extent<int8_t>;
+    template class Extent<uint8_t>;
+    template class Extent<int16_t>;
+    template class Extent<uint16_t>;
+    template class Extent<int32_t>;
+    template class Extent<uint32_t>;
+    template class Extent<int64_t>;
+    template class Extent<uint64_t>;
+}}
