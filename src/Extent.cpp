@@ -101,4 +101,15 @@ namespace TP { namespace geom {
         extend(extent.$minx, extent.$miny);
         extend(extent.$maxx, extent.$maxy);
     }
+
+    template class Extent<float>;
+    template class Extent<double>;
+    template class Extent<int8_t>;
+    template class Extent<uint8_t>;
+    template class Extent<int16_t>;
+    template class Extent<uint16_t>;
+    template class Extent<int32_t>;
+    template class Extent<uint32_t>;
+    template class Extent<int64_t>;
+    template class Extent<uint64_t>;
 }}
