@@ -15,6 +15,7 @@
 */
 
 #include <tp/geom/Extent.h>
+#include <algorithm>
 
 namespace TP { namespace geom {
     template <class T>
@@ -32,12 +33,10 @@ namespace TP { namespace geom {
             neginf = std::numeric_limits<T>::min();
         }
 
-        set(
-            inf,
-            inf,
-            neginf,
-            neginf
-        );
+        $minx = inf;
+        $miny = inf;
+        $maxx = neginf;
+        $maxy = neginf;
     }
 
     template <class T>
@@ -74,10 +73,10 @@ namespace TP { namespace geom {
 
     template <class T>
     void Extent<T>::set(T minx, T miny, T maxx, T maxy) {
-        $minx = minx;
-        $miny = miny;
-        $maxx = maxx;
-        $maxy = maxy;
+        $minx = std::min(minx, maxx);
+        $miny = std::min(miny, maxy);
+        $maxx = std::max(minx, maxx);
+        $maxy = std::max(miny, maxy);
     }
 
     template <class T>
