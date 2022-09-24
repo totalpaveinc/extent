@@ -49,6 +49,14 @@ namespace TP { namespace geom {
     Extent<T>::~Extent() {}
 
     template <class T>
+    bool Extent<T>::isInBounds(const T x, const T y) const {
+        return (
+            x >= $minx && x <= $maxx &&
+            y >= $miny && y <= $maxy
+        );
+    }
+
+    template <class T>
     bool Extent<T>::isInBounds(const Extent<T>& b) const {
         const Extent<T>& a = *this;
         /*
@@ -59,8 +67,8 @@ namespace TP { namespace geom {
             4 boolean checks
         */
         return !(
-            b.$minx > a.$maxx || b.$maxx < a.$minx ||
-            b.$miny > a.$maxy || b.$maxy < a.$miny
+            b.$minx >= a.$maxx || b.$maxx <= a.$minx ||
+            b.$miny >= a.$maxy || b.$maxy <= a.$miny
         );
     }
 
@@ -73,7 +81,7 @@ namespace TP { namespace geom {
     }
 
     template <class T>
-    void  Extent<T>::get(T& minx, T& miny, T& maxx, T& maxy) const {
+    void Extent<T>::get(T& minx, T& miny, T& maxx, T& maxy) const {
         minx = $minx;
         miny = $miny;
         maxx = $maxx;
@@ -81,7 +89,13 @@ namespace TP { namespace geom {
     }
 
     template <class T>
-    void  Extent<T>::extend(T x, T y) {
+    void Extent<T>::getRange(T& x, T& y) const {
+        x = $maxx - $minx;
+        y = $maxy - $miny;
+    }
+
+    template <class T>
+    void Extent<T>::extend(T x, T y) {
         if (x < $minx) {
             $minx = x;
         }
@@ -95,11 +109,31 @@ namespace TP { namespace geom {
             $maxy = y;
         }
     }
+    
+    template <class T>
+    void Extent<T>::translate(T x, T y) {
+        $minx += x;
+        $maxx += x;
+        $miny += y;
+        $maxy += y;
+    }
 
     template <class T>
-    void  Extent<T>::extend(const Extent<T>& extent) {
+    void Extent<T>::extend(const Extent<T>& extent) {
         extend(extent.$minx, extent.$miny);
         extend(extent.$maxx, extent.$maxy);
+    }
+
+    // @static
+    template <class T>
+    Extent<T> Extent<T>::quad(const Extent<T>& extent) {
+        T rx, ry;
+        extent.getRange(rx, ry);
+
+        rx /= 2.0;
+        ry /= 2.0;
+
+        return Extent<T>(extent.$minx, extent.$miny, extent.$minx + rx, extent.$miny + ry);
     }
 
     template class Extent<float>;

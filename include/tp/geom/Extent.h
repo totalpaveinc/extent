@@ -38,14 +38,19 @@ namespace TP { namespace geom {
              * @return false 
              */
             virtual bool isInBounds(const Extent& b) const;
+            virtual bool isInBounds(const T x, const T y) const;
 
             void set(T minx, T miny, T maxx, T maxy);
 
             void get(T& minx, T& miny, T& maxx, T& maxy) const;
 
+            void getRange(T& x, T& y) const;
+            void translate(T x, T y);
             void extend(T x, T y);
 
-            void extend(const Extent& extent);
+            void extend(const Extent<T>& extent);
+
+            static Extent<T> quad(const Extent<T>& extent);
 
         private:
             T $minx, $miny, $maxx, $maxy;
