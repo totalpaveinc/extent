@@ -66,8 +66,8 @@ namespace TP { namespace geom {
             4 boolean checks
         */
         return !(
-            b.$minx >= a.$maxx || b.$maxx <= a.$minx ||
-            b.$miny >= a.$maxy || b.$maxy <= a.$miny
+            b.$minx > a.$maxx || b.$maxx < a.$minx ||
+            b.$miny > a.$maxy || b.$maxy < a.$miny
         );
     }
 
