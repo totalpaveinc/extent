@@ -28,5 +28,10 @@ add_library(tpgeomextent STATIC
 )
 
 target_include_directories(tpgeomextent PUBLIC include/)
+
+
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    add_subdirectory(./tests)
+endif()
 # add_executable(qttest test/main.cpp)
 # target_link_libraries(qttest tpquadtree)
