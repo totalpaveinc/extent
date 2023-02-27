@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.22.1)
 
-project(tpgeomextent VERSION 0.0.0 LANGUAGES CXX)
+project(tpgeomextent VERSION 0.0.1 LANGUAGES CXX)
 
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "") 
     SET(CMAKE_BUILD_TYPE "Debug")
