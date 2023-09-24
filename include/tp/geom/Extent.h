@@ -32,8 +32,7 @@ namespace TP { namespace geom {
             /**
              * @brief   Returns true if the other extent is completely contained
              *          or overlaps this extent.
-             * 
-             * @param extent 
+             *  
              * @return true 
              * @return false 
              */
